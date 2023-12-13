@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    border: 1px solid transparent;
+    height: 100%;
+    flex-grow: 1;
+    background-color: #8e7fab;
+    transition: 300ms ease-in-out;
+}
+
+.btn:hover {
+    background-color: #c1b0e5;
+    border-color: purple;
+    transition: 300ms ease-in-out;
+}
+
+.cont {
+    display: block;
+    width: auto;
+    height: 100%;
+    flex-grow: 1;
+    background-color: #8e7fab;
+    transition: 300ms ease-in-out;
+}
+

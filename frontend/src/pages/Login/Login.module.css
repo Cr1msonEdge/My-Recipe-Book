@@ -1,0 +1,42 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.log {
+    text-align: center;
+    padding: 10px;
+}
+
+.sp {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    width: 100%;
+    height: 35px;
+}
+
+.frm {
+    display: flex;
+    flex-direction: column;
+    /*background-color: aquamarine;*/
+    color: red;
+    width: 100%;
+    height: 200px;
+}
+
+.req {
+    display: block;
+    margin: 5px 0;
+    height: 30px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+
+.btn {
+    margin: 5px 0;
+    height: 30px;
+    background-color: white;
+    border: 1px solid transparent;
+    border-radius: 5px;
+}

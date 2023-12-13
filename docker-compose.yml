@@ -1,0 +1,35 @@
+version: "3.1"
+
+services:
+  recipe_backend:
+    container_name: backend
+    entrypoint: /entrypoint.sh
+    build:
+      context: ./fullstack_recipe_book
+    ports:
+      - 8000:8000        
+    depends_on:
+      - db
+
+  recipe_frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+    ports:
+      - 3000:3000
+    depends_on:
+      - recipe_backend
+    
+  db:
+    container_name: db
+    image: postgres:16.1
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: "recipebook"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "1234"
+    ports:
+      - 5432:5432
+volumes:
+  postgres_data:

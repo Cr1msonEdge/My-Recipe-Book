@@ -1,0 +1,9 @@
+.logBtn {
+    margin: 1% 40%;
+    width: 20%;
+    height: 20%;
+    background-color: white;
+    border-radius: 5px;
+    transition: border-color 0.4s ease;
+    border: 1px solid transparent;
+}

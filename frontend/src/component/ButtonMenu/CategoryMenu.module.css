@@ -1,0 +1,14 @@
+.btn {
+    position: absolute;
+    display: block;
+    border: 1px solid transparent;
+    flex-grow: 1;
+    background-color: #8e7fab;
+    transition: 300ms ease-in-out;
+}
+
+.btn:hover {
+    background-color: #c1b0e5;
+    border-color: purple;
+    transition: 300ms ease-in-out;
+}

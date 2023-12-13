@@ -1,0 +1,83 @@
+import React, {useEffect, useState} from "react";
+import styles from "./Profile.module.css"
+import Core from "../../ui/Core/core";
+import {authService} from "../../services/Authentication/AuthenticationService";
+import {useNavigate} from "react-router-dom";
+import { logData } from "../../assets/logData/logData";
+
+
+function Profile() {
+    const navigate = useNavigate();
+    const [userData, setUserData] = useState({});
+    const [isLoginned, setIsLoginned] = useState(0);
+    const [loaded, setLoaded] = useState(false);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await authService.isLoginned();
+            console.log(data);
+            data.detail === 'success' ? setIsLoginned(1) : setIsLoginned(2);
+            setUserData(data);
+            setLoaded(true);
+        }
+        fetchData();
+    }, [isLoginned]);
+    
+    // handlers
+    function handleNewPost() {
+        navigate('/addrecipe');
+    }
+    function handleNew() {
+        navigate('/addnew');
+    }
+    function moderation() {
+        navigate('/admin-menu');
+    }
+    function handleLogout() {
+        const doLogout = async () => {
+            const data = await authService.logout();
+            if (data.data.message !== 'success') {
+                alert('Ошибка!');
+            }
+        }
+        doLogout();
+        navigate('/about');
+    }
+
+    if (!loaded) {
+        return (
+            <Core onChange={logData.temp}>
+                <div className={styles.loaderdiv}>
+                </div>
+            </Core>
+        )
+    }
+    else if (isLoginned === 2) {
+        navigate('/register');
+    }
+    return (
+        <Core onChange={logData.temp}>
+            <div className={styles.Container}>
+                <img className={styles.Img} src={userData.avatar} alt={"Изображение отсутствует"}></img>
+                <div className={styles.UserData}>
+                    <span>Имя пользователя: </span>{userData.username}<br/>
+                    <span>Электронная почта: {userData.email}</span><br/>
+                    <span>О себе: {userData.about}</span><br/>
+                    <span>Ранг: {userData.rank}</span><br/>
+                    <span>Рецептов до следующего ранга: {userData.toNextRank}</span><br/>
+                    {userData.is_banned ? <span>Вы заблокированы. <br/>Причина блокировки: {userData.ban_name} <br/> Подробнее: {userData.ban_info}</span> : <span></span>}
+                </div>
+            </div>
+            <div className={styles.cnt}>
+                {!userData.is_banned? (<button className={styles.btn} onClick={handleNewPost}>Добавить рецепт </button>) : <div></div>}
+                {!userData.is_banned? (<button className={styles.btn} onClick={handleNew}>Добавить новое </button>) : <div></div>}
+                {userData.is_staff ? (<button className={styles.btn} onClick={moderation}>Модерация</button>) : <div></div>}
+                <button className={styles.btn} onClick={handleLogout}> Выйти </button>
+            </div>
+        </Core>
+    )
+
+}
+
+
+export default Profile

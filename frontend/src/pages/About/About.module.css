@@ -1,0 +1,22 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.about {
+    background-color: transparent;
+    width: 80%;
+    margin: 0 10%;
+    height: auto;
+    min-height: 1200px;
+}
+
+.title {
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.text {
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+}

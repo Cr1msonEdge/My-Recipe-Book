@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    margin-left: 10%;
+    margin-right: 10%;
+    padding: 10px;
+    position: relative;
+    display: block;
+    width: 80%;
+    height: auto;
+}
+
+.btn {
+    display: block;
+    width: 30%;
+    margin-left: 35%;
+    margin-right: 35%;
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    height: 100px;
+    background-color: #8e7fab;
+    transition: 300ms ease-in-out;
+    box-shadow: 0 0 2px #240227;
+}
+
+.btn:hover {
+    border: 1px solid purple;
+    box-shadow: 0 0 5px #240227;
+    border-radius: 5px;
+    transition: 300ms ease-in-out;
+}
+
+.loaderdiv {
+    padding-top: 30px;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    align-self: center;
+    margin-left: 45%;
+    margin-right: 50%;
+    flex: 1;
+}
