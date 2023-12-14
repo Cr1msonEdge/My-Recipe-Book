@@ -4,7 +4,7 @@ export const authService = {
     async register(userdata) {
         let responseResult = '';
         const response =  await axios.post('http://localhost:8000/api/register', userdata)
-            .then(result => (responseResult = 'Success'))
+            .then(() => (responseResult = 'Success'))
             .catch(error => (responseResult = error.response.data.detail.toString()));
         responseResult = response;
         return responseResult;

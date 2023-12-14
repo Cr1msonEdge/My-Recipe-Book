@@ -22,7 +22,6 @@ const options = [
 
 function AddSomethingNew() {
     const navigate = useNavigate();
-    const [isLogged, setIsLogged] = useState(false);
 
     const [measures, setMeasures] = useState([]);
 
@@ -55,7 +54,9 @@ function AddSomethingNew() {
                         alert(data1.message);
                         navigate('/addnew');
                     }
-                    alert('Будет выложено после модерации!');
+                    else {
+                        alert('Будет выложено после модерации!');
+                    }
                     break;
                 case 'category':
                     const cat = {
@@ -81,6 +82,8 @@ function AddSomethingNew() {
                     }
                     alert('Будет выложено после модерации!');
                     break;
+                default:
+                    break;
             }
         }
         postData();
@@ -88,7 +91,7 @@ function AddSomethingNew() {
     }
 
     return (
-        <Core logCheck={setIsLogged}>
+        <Core>
             <div className={styles.outCont}>
                 <div className={styles.cont}>
                     <span className={styles.title}>Добавить что-то новое</span>

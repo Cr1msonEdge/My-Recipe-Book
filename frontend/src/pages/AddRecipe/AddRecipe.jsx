@@ -126,9 +126,16 @@ function AddRecipe() {
                 }
                 rcp.composition.push(comp);
             }
-            await recipeService.postComposition(rcp.composition).then((response) => (console.log(response)));
-            alert('Рецепт будет выложен после проверки модерацией.');
-            navigate('/');
+            const data = await recipeService.postComposition(rcp.composition).then((response) => (console.log(response)));
+            if (!data.message) {
+                alert("Рецепт будет выложен после проверки модерацией.")
+                navigate('/');
+            }
+            else{
+                alert('Ошибка при добавлении рецепта. Проверьте правильность заполненных полей!');
+                return;
+            }
+            
             return;
         }
         postData();
@@ -139,7 +146,9 @@ function AddRecipe() {
         recipeIngredients.find((o, i) => {
             if (o.id.toString() === name) {
                 recipeIngredients[i].value = value;
+                return 0;
             }
+            return -1;
         })
     };
     if (!(categoryLoaded && cousinLoaded && ingredientsLoaded)) {

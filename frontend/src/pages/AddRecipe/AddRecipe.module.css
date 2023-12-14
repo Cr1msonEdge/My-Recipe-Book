@@ -90,6 +90,12 @@ input::-webkit-inner-spin-button {
     border: 1px solid transparent;
 }
 
+.btn:hover {
+    border-color: purple;
+    transition: 300ms ease-in-out;
+    box-shadow: 0 0 2px black;
+}
+
 .loaderdiv {
     padding-top: 30px;
     display: flex;
@@ -139,6 +145,8 @@ input::-webkit-inner-spin-button {
     box-sizing: border-box;         /* Opera/IE 8+ */
     font-size: 14px;
     font-family: 'Open-sans', sans-serif;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 .ingrlabel {
@@ -146,7 +154,7 @@ input::-webkit-inner-spin-button {
     width: 30%;
     height: 30px;
     background-color: white;
-    border: none;
+    border: 1px solid transparent;
     text-align: right;
     align-items: center;
     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
@@ -154,11 +162,12 @@ input::-webkit-inner-spin-button {
     box-sizing: border-box;         /* Opera/IE 8+ */
     font-size: 14px;
     font-family: 'Open-sans', sans-serif;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .ingrdiv {
     display: flex;
-    background-color: white;
     width: 50%;
     margin: 5px 25% 0;
     align-items: center;

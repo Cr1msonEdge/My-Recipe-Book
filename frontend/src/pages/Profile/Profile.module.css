@@ -23,6 +23,11 @@
     height: 50%;
 }
 
+.UserData span {
+    font-family: "Open-sans", sans-serif;
+    font-size: 18px;
+}
+
 .cnt {
     display: flex;
     width: 80%;

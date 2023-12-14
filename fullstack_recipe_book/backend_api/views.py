@@ -17,9 +17,10 @@ user_img_root = img_root + 'user_img'
 
 
 class RegisterView(APIView):
-    parser_classes = [MultiPartParser, FormParser]
 
     def post(self, request):
+        print('yy', request.data)
+
         serializer = UserSerializer(data=request.data)
         email = request.data['email']
         someuser = User.objects.filter(email=email).first()
@@ -80,21 +81,20 @@ class UserView(APIView):
         ans = {"detail": "success"}
         for i in serializer.data.keys():
             ans[i] = serializer.data[i]
-
-        if ans['avatar'] is None:
-            if user.is_staff:
-                ans['avatar'] = user_img_root + '/moderator.jpg'
-            elif user.is_banned:
-                ans['avatar'] = user_img_root + '/banned.jpg'
-                ban = Ban.objects.filter(user=user.id).first()
-                ans['ban_name'] = ban.name
-                ans['ban_info'] = ban.text
-            elif user.rank.id == 1:
-                ans['avatar'] = user_img_root + '/rank1.jpg'
-            elif user.rank.id == 2:
-                ans['avatar'] = user_img_root + '/rank2.jpg'
-            elif user.rank.id == 3:
-                ans['avatar'] = user_img_root + '/rank3.jpg'
+        ans['rank'] = user.rank.name
+        if user.is_staff:
+            ans['avatar'] = user_img_root + '/moderator.jpg'
+        elif user.is_banned:
+            ans['avatar'] = user_img_root + '/banned.jpg'
+            ban = Ban.objects.filter(user=user.id).first()
+            ans['ban_name'] = ban.name
+            ans['ban_info'] = ban.text
+        elif user.rank.id == 1:
+            ans['avatar'] = user_img_root + '/rank1.jpg'
+        elif user.rank.id == 2:
+            ans['avatar'] = user_img_root + '/rank2.jpg'
+        elif user.rank.id == 3:
+            ans['avatar'] = user_img_root + '/rank3.jpg'
         ans['toNextRank'] = RankHandler.toNextRank(user.id)
         return Response(ans)
 
@@ -191,6 +191,7 @@ class RecipeListView(APIView):
 
     def post(self, request):
         recipe_data = request.data
+        print('123', recipe_data)
         recipe_serializer = RecipeSerializer(data=recipe_data)
         recipename = recipe_data['name']
         somerecipe = Recipe.objects.filter(name=recipename).first()

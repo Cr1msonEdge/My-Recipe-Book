@@ -3,7 +3,6 @@ import styles from "./Profile.module.css"
 import Core from "../../ui/Core/core";
 import {authService} from "../../services/Authentication/AuthenticationService";
 import {useNavigate} from "react-router-dom";
-import { logData } from "../../assets/logData/logData";
 
 
 function Profile() {
@@ -46,7 +45,7 @@ function Profile() {
 
     if (!loaded) {
         return (
-            <Core onChange={logData.temp}>
+            <Core>
                 <div className={styles.loaderdiv}>
                 </div>
             </Core>
@@ -56,7 +55,7 @@ function Profile() {
         navigate('/register');
     }
     return (
-        <Core onChange={logData.temp}>
+        <Core>
             <div className={styles.Container}>
                 <img className={styles.Img} src={userData.avatar} alt={"Изображение отсутствует"}></img>
                 <div className={styles.UserData}>

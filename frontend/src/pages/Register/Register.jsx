@@ -66,8 +66,10 @@ function Register() {
             email: email,
             password: password,
             about: about,
+            is_banned: false,
+            is_staff: false,
+            rank: 1
         };
-        
         const isValid = await shape.isValid(userdata);
         if (!isValid) {
             alert('Заполните логин, почту, пароль (не менее 8 символов)')
@@ -75,7 +77,8 @@ function Register() {
         else {
             const data = await authService.register(userdata);
             if (data === 'Success') {
-                navigate('register-success');
+                alert('Регистрация успешна!');
+                navigate('/');
             }
             else {
                 alert("Пользователь уже существует");        

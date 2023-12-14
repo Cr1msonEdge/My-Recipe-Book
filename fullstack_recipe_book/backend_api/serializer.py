@@ -5,7 +5,7 @@ from .models import Recipe, User, Category, Ingredient, Measure, Cousin, Composi
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password', 'about', 'avatar', 'rank', 'is_staff', 'is_banned']
+        fields = ['id', 'username', 'email', 'password', 'about', 'rank', 'is_staff', 'is_banned']
         extra_kwargs = {
             'password': {"write_only": True}
         }

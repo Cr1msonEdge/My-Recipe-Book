@@ -60,9 +60,11 @@
 
 .desc {
     display: block;
-    font-family: 'Montserrat', sans-serif;
+    padding-left: 10px;
+    font-family: 'Open-sans', sans-serif;
     font-size: 16px;
     white-space: pre-line;
+    text-align: left;
 }
 
 .table {
@@ -70,6 +72,8 @@
     width: 100%;
     border-collapse: collapse;
     border: 1px solid black;
+    font-size: 16px;
+    font-family: 'Open-sans', sans-serif;
 }
 
 

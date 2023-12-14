@@ -25,7 +25,7 @@ class User(AbstractUser):
 
 class Recipe(models.Model):
     name = models.CharField(max_length=50)
-    short_description = models.CharField(max_length=100)
+    short_description = models.CharField(max_length=300)
     instruction = models.TextField()
     difficulty = models.IntegerField()
     category = models.ForeignKey('Category', on_delete=models.PROTECT, null=True)
