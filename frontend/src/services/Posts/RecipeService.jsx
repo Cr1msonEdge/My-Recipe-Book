@@ -10,7 +10,6 @@ export const recipeService = {
         return response.data;
     },
     async postRecipe(rcp) {
-        console.log('rcp = ', rcp);
         const response = await axios.post(BASE_URL + '/posts', rcp,
             {withCredentials: true, headers: {'Content-Type': 'multipart/form-data'}});
         return response.data;
@@ -37,7 +36,7 @@ export const recipeService = {
     // composition
     async postComposition(comp) {
         let result = {message: ''};
-        const response = await axios.post('http://localhost:8000/api/composition', comp, {withCredentials: true})
+        await axios.post('http://localhost:8000/api/composition', comp, {withCredentials: true})
         .then(() => result.message = 'success')
         .catch((error) => (result.message = 'error: ' + error.response.data[Object.keys(error.response.data)[0]]));
         return result;

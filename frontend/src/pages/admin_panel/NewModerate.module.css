@@ -10,10 +10,16 @@
     margin: 0 10% 10px;
     background-color: #e3d9cf;
     border-radius: 10px;
-    box-shadow: 0 0 5px #240227;
+    box-shadow: 0 0 2px #240227;
     text-align: center;
     font-size: 18px;
     font-family: 'Open Sans', sans-serif;
+    transition: box-shadow 200ms ease-in-out;
+}
+
+.post:hover{
+    box-shadow: 0 0 8px #240227;
+    transition: box-shadow 200ms ease-in-out;
 }
 
 .title {

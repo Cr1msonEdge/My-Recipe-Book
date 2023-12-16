@@ -21,6 +21,8 @@
     /*background-color: #D0B8A8;*/
     background-color: #e3dcd1;
     height: 50%;
+    text-align: left;
+    margin-left: 100px;
 }
 
 .UserData span {

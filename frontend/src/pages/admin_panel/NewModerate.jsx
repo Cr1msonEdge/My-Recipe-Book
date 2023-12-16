@@ -6,10 +6,6 @@ import { authService } from "../../services/Authentication/AuthenticationService
 
 function NewModerate({el}) {
     const navigate = useNavigate();
-    // function handlePost() {
-    //     navigate(`/admin/post/${el.id}`);
-    // }
-    console.log('el', el);
 
     const labelHandler = {
         'Ingredient': 'Ингредиент',

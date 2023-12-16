@@ -40,7 +40,6 @@ function Recipe() {
     
     function ratingHandle(value) {
         const fetchRating = async () => {
-            console.log('mm', value);
             const data = await recipeService.patchRating(value, userData.id, id);
             setStars(data.star);
         }

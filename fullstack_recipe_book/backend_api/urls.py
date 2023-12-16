@@ -5,7 +5,7 @@ from .views import (RegisterView, LoginView, UserView, LogoutView, RecipeListVie
                     CategoryIntView, IngredientListView, CousinListView, RecipeView, CompositionListView,
                     CompositionView, CategorySlugView, CousinSlugView, RatingListView, RatingUserView,
                     RatingUserRecipeView, RankListView, UserIdView, ModerationView, IngredientSlugView, RelevantView,
-                    RecipeAllView, BanUserView, NewModeratorView, BanListView)
+                    RecipeAllView, BanUserView, NewModeratorView, BanListView, IngredientAllView)
 
 urlpatterns = [
     path('register', RegisterView.as_view()),
@@ -15,6 +15,7 @@ urlpatterns = [
     path('posts', RecipeListView.as_view()),
     path('posts/<int:pk>', RecipeView.as_view()),
     path('ingredients', IngredientListView.as_view()),
+    path('ingredientsall', IngredientAllView.as_view()),
     path('measures', MeasureListView.as_view()),
     path('categories', CategoryListView.as_view()),
     path('categories/<int:pk>', CategoryIntView.as_view()),

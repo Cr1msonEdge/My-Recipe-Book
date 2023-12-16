@@ -1,12 +1,10 @@
 import React from "react";
 import styles from './Post.module.css'
 import {useNavigate} from 'react-router-dom'
-import RatingBar from "../RatingBar/RatingBar";
 import { Rating } from "@mui/material";
 
 
 function Post({el}) {
-    console.log('post,',el);
     const navigate = useNavigate();
     function handlePost() {
         navigate(`/post/${el.id}`);

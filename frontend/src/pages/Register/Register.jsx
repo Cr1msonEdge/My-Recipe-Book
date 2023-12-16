@@ -45,7 +45,6 @@ function Register() {
         }
         const fetchData = async () => {
             const data = await authService.login(userdataLog);
-            console.log('data = ', data);
             if (data.detail === 'Incorrect password') {
                 alert("Проверьте правильность пароля!");
             }

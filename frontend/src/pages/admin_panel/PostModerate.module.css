@@ -14,13 +14,13 @@
     font-size: 18px;
     background-color: #eae2d6c6;
     box-shadow: 0 0 2px #240227;
-    transition: 100ms ease-in;
+    transition: box-shadow 200ms ease-in-out;
     font-family: 'Open Sans', sans-serif;
 }
 
 .post:hover {
-    box-shadow: 0 0 5px #240227;
-    transition: 100ms ease-in;
+    box-shadow: 0 0 8px #240227;
+    transition: box-shadow 200ms ease-in-out;
 }
 
 .title {

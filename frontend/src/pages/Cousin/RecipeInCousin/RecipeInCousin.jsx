@@ -15,12 +15,10 @@ function RecipeInCousin() {
         const fetchData = async () => {
             const data = await recipeService.getCousin(slug);
             setRecipes(data.recipes);
-            console.log('asd = ', data);
         }
         fetchData();
     }, [slug]);
     
-    console.log('recipe in cousins = ', recipes);
     return (
         <Core onChange={logData.temp}>
             <div className={styles.Home}>

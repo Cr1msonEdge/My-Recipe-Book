@@ -27,22 +27,20 @@ function RecipeModerate() {
         };
         fetchData();
         
-    }, [id]);
+    }, [id, navigate]);
 
 
     // handle buttons
     function acceptHandle() {
         const fetchData = async () => { 
-            const data = await authService.patchRecipe({id: id, data: {is_published: true}});
-            console.log('accepted', data);
+            await authService.patchRecipe({id: id, data: {is_published: true}});
         }
         fetchData();
         navigate('/profile');
     }
     function deleteHandle() {
         const fetchData = async () => { 
-            const data = await authService.deleteRecipe({id: id});
-            console.log('deleted', data);
+            await authService.deleteRecipe({id: id});
         }
         fetchData();
         navigate('/profile');

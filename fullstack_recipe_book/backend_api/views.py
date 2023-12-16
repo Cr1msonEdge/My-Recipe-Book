@@ -77,7 +77,6 @@ class UserView(APIView):
 
         user = User.objects.filter(id=payload['id']).first()
         serializer = UserSerializer(user)
-        print('srl', serializer.data)
         ans = {"detail": "success"}
         for i in serializer.data.keys():
             ans[i] = serializer.data[i]
@@ -194,9 +193,12 @@ class RecipeListView(APIView):
         print('123', recipe_data)
         recipe_serializer = RecipeSerializer(data=recipe_data)
         recipename = recipe_data['name']
-        somerecipe = Recipe.objects.filter(name=recipename).first()
-        if somerecipe is not None:
-            raise NotAcceptable("Recipe with such name already exists")
+        some_recipe = Recipe.objects.all()
+        for recipe in some_recipe:
+            print('yyy', str(recipe).lower(), recipename, str(recipe).lower() == recipename)
+            if str(recipe).lower() == recipename.lower():
+                raise NotAcceptable("Recipe with such name already exists")
+
         if recipe_serializer.is_valid(raise_exception=True):
             temp = recipe_serializer.save()
             result = {'id': temp.id, 'data': recipe_serializer.data}
@@ -407,7 +409,7 @@ class MeasureListView(APIView):
 
 class IngredientListView(APIView):
     def get(self, request):
-        ingr = Ingredient.objects.all()
+        ingr = Ingredient.objects.filter(is_published=True)
         if ingr.first() is None:
             return Response([])
         output = [
@@ -435,6 +437,23 @@ class IngredientListView(APIView):
         return Response({
             "message": "deleted all"
         })
+
+
+class IngredientAllView(APIView):
+    def get(self, request):
+        ingr = Ingredient.objects.all()
+        if ingr.first() is None:
+            return Response([])
+        output = [
+            {
+                "id": output.id,
+                "name": output.name.capitalize(),
+                "measure": output.measure.name,
+                "slug": output.slug,
+                'is_published': output.is_published
+             } for output in ingr
+        ]
+        return Response(output)
 
 
 class IngredientSlugView(APIView):
@@ -539,11 +558,13 @@ class CompositionListView(APIView):
 
         if serializer.is_valid(raise_exception=True):
             serializer.save()
-            return Response(serializer.data)
+            temp = {'message': 'success'}
+            return Response(temp)
         else:
             recipe = Recipe.objects.get(request.data[0].recipe)
             recipe.delete()
-            return Response('Ошибка при сохранении ингредиента рецепта')
+            temp = {'message': 'Error on saving ingredient'}
+            return Response(temp)
 
 
 class CompositionView(APIView):

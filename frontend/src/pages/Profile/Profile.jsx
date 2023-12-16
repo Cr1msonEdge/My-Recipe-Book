@@ -3,6 +3,7 @@ import styles from "./Profile.module.css"
 import Core from "../../ui/Core/core";
 import {authService} from "../../services/Authentication/AuthenticationService";
 import {useNavigate} from "react-router-dom";
+import PacmanLoader from "react-spinners/PacmanLoader";
 
 
 function Profile() {
@@ -14,7 +15,6 @@ function Profile() {
     useEffect(() => {
         const fetchData = async () => {
             const data = await authService.isLoginned();
-            console.log(data);
             data.detail === 'success' ? setIsLoginned(1) : setIsLoginned(2);
             setUserData(data);
             setLoaded(true);
@@ -47,6 +47,7 @@ function Profile() {
         return (
             <Core>
                 <div className={styles.loaderdiv}>
+                    <PacmanLoader size={50} color={'#5C5470'} className={styles.loader}></PacmanLoader>
                 </div>
             </Core>
         )
@@ -59,7 +60,7 @@ function Profile() {
             <div className={styles.Container}>
                 <img className={styles.Img} src={userData.avatar} alt={"Изображение отсутствует"}></img>
                 <div className={styles.UserData}>
-                    <span>Имя пользователя: </span>{userData.username}<br/>
+                    <span>Имя пользователя: {userData.username}</span><br/>
                     <span>Электронная почта: {userData.email}</span><br/>
                     <span>О себе: {userData.about}</span><br/>
                     <span>Ранг: {userData.rank}</span><br/>

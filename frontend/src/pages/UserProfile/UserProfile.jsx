@@ -2,13 +2,14 @@ import React, {useEffect, useState} from "react";
 import styles from "./UserProfile.module.css"
 import Core from "../../ui/Core/core";
 import {authService} from "../../services/Authentication/AuthenticationService";
-import {useNavigate, useParams} from "react-router-dom";
+//import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import { logData } from "../../assets/logData/logData";
 
 
 function UserProfile() {
     const {id} = useParams();
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
     const [userData, setUserData] = useState({});
     const [isLoginned, setIsLoginned] = useState(0);
     const [loaded, setLoaded] = useState(false);
@@ -16,34 +17,24 @@ function UserProfile() {
     useEffect(() => {
         const fetchData = async () => {
             const data = await authService.getUser(id);
-            console.log(data);
             data.detail === 'success' ? setIsLoginned(1) : setIsLoginned(2);
             setUserData(data);
             setLoaded(true);
         }
         fetchData();
-    }, [isLoginned]);
+    }, [isLoginned, id]);
     
     // handlers
-    function handleNewPost() {
-        navigate('/addrecipe');
-    }
-    function handleNew() {
-        navigate('/addnew');
-    }
-    function moderation() {
-        navigate('/admin-menu');
-    }
-    function handleLogout() {
-        const doLogout = async () => {
-            const data = await authService.logout();
-            if (data.data.message !== 'success') {
-                alert('Ошибка!');
-            }
-        }
-        doLogout();
-        navigate('/about');
-    }
+    // function handleLogout() {
+    //     const doLogout = async () => {
+    //         const data = await authService.logout();
+    //         if (data.data.message !== 'success') {
+    //             alert('Ошибка!');
+    //         }
+    //     }
+    //     doLogout();
+    //     navigate('/about');
+    // }
 
     if (!loaded) {
         return (

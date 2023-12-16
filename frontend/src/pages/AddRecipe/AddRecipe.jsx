@@ -14,6 +14,7 @@ const style = {
         ...base,
         border: 0,
         boxShadow: 'none',
+        fontSize: '14px'
     })
 };
 
@@ -101,7 +102,17 @@ function AddRecipe() {
                 },
                 composition: []
             };
+            if (!rcp.recipe.name || !rcp.recipe.short_description || !rcp.recipe.category || !rcp.recipe.cousin || !rcp.recipe.difficulty || !rcp.recipe.instruction || ! rcp.recipe.user) {
+                alert('Заполните все поля');
+                return;
+            }
             let data2 = null;
+            for (let i = 0; i < recipeIngredients.length; ++i) {
+                if (!recipeIngredients[i].value) {
+                    alert("Заполните все поля ингредиентов!");
+                    return;
+                }
+            }
             await recipeService.postRecipe(rcp.recipe)
                 .then((response) => (data2 = response))
                 .catch((error) => (data2 = error));
@@ -115,10 +126,6 @@ function AddRecipe() {
                 return;
             }
             for (let i = 0; i < recipeIngredients.length; ++i) {
-                if (!recipeIngredients[i].value) {
-                    alert("Заполните все поля ингредиентов!");
-                    return;
-                }
                 let comp = {
                     ingredient: recipeIngredients[i].id,
                     value: recipeIngredients[i].value,
@@ -126,8 +133,8 @@ function AddRecipe() {
                 }
                 rcp.composition.push(comp);
             }
-            const data = await recipeService.postComposition(rcp.composition).then((response) => (console.log(response)));
-            if (!data.message) {
+            const data = await recipeService.postComposition(rcp.composition);
+            if (!data.message.includes('Error')) {
                 alert("Рецепт будет выложен после проверки модерацией.")
                 navigate('/');
             }
@@ -143,12 +150,10 @@ function AddRecipe() {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        recipeIngredients.find((o, i) => {
-            if (o.id.toString() === name) {
+        recipeIngredients.forEach((o, i) => {
+            if (o.id.toString() === name.toString()) {
                 recipeIngredients[i].value = value;
-                return 0;
             }
-            return -1;
         })
     };
     if (!(categoryLoaded && cousinLoaded && ingredientsLoaded)) {
@@ -167,7 +172,7 @@ function AddRecipe() {
                     <input className={styles.inp} placeholder={'Название рецепта'} onChange={e =>
                         (setRecipeName(e.target.value))} value={recipeName}></input>
                     <textarea className={styles.txtr} placeholder={'Краткое описание рецепта'} onChange={e =>
-                        (setRecipeShortDescription(e.target.value))} value={recipeShortDescription} rows={8}></textarea>
+                        (setRecipeShortDescription(e.target.value))} value={recipeShortDescription} rows={10} maxLength={10000}></textarea>
                     <Select styles={style} className={styles.slct}
                             placeholder={'Кухня'} onChange={setRecipeCousin}
                             value={recipeCousin} options={cousin}
@@ -185,15 +190,6 @@ function AddRecipe() {
                               onChange={e => (setRecipeFullDescription(e.target.value))}
                               value={recipeFullDescription}></textarea>
                     <Select className={styles.slct} placeholder={'Сложность'} options={difficulty} value={recipeDifficulty} onChange={setRecipeDifficulty} styles={style}></Select>
-                    {/*<MultiSelect value={ingredients} onChange={(e) => setSelectedIngredients(e.value)}*/}
-                    {/*filter placeholder="Ингредиенты" options={temp} optionLabel={name}>*/}
-                    {/*</MultiSelect>*/}
-                    {/* <div className={styles.inpimage}>Изображение блюда
-                    <input type={'file'} className={styles.inp} placeholder="ИЗображение"
-                           onChange={(e) =>
-                           {console.log('dasd', e.target.files[0].type.slice(e.target.files[0].type.lastIndexOf('/') + 1, e.target.files[0].type.length));
-                           setRecipeImage(e.target.files[0])}}></input>
-                    </div> */}
                     
                     <input type="file" id='actual-btn' hidden accept=".png,.jpeg,.jpg" onChange={(e) => (setRecipeImage(e.target.files[0]))}
                     onClick={(e) => e.target.value = null} />                     

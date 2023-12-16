@@ -18,7 +18,6 @@ function RecipeInCategory() {
         fetchData();
     }, [slug]);
 
-    console.log('recipe in category = ', recipes);
     return (
         <Core onChange={logData.temp}>
             <div className={styles.Home}>

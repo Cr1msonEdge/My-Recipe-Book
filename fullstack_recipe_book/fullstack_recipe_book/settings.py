@@ -94,7 +94,7 @@ DATABASES = {
         'NAME': 'recipebook',
         'USER': 'postgres',
         'PASSWORD': '1234',
-        'HOST': 'db',
+        'HOST': 'localhost',
         'PORT': 5432,
     }
 }

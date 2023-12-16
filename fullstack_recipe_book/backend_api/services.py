@@ -50,7 +50,7 @@ class RankHandler:
             return 0
 
         denom_part = [coef[i] * n[i] for i in range(len(coef))]
-        return sum(a) / sum(denom_part)
+        return round(sum(a) / sum(denom_part), 1)
 
         # c1 = 1
         # c2 = 1.5
@@ -74,17 +74,12 @@ class RankHandler:
         u = User.objects.get(pk=user)
         user_recipes = Recipe.objects.filter(user=user, is_published=True).count()
         rank_list = Rank.objects.order_by('requirement')
-        for i in range(len(rank_list) - 1):
-            if rank_list[i].requirement <= user_recipes <= rank_list[i + 1].requirement:
+        for i in range(len(rank_list) - 1, 0, -1):
+            if user_recipes >= rank_list[i].requirement:
                 u = UserSerializer(u, data={'rank': rank_list[i].id}, partial=True)
                 if u.is_valid(raise_exception=True):
                     u.save()
                     return 'Updated'
-        if user_recipes >= rank_list[len(rank_list) - 1].requirement:
-            u = UserSerializer(u, data={'rank': rank_list[len(rank_list) - 1].id}, partial=True)
-            if u.is_valid(raise_exception=True):
-                u.save()
-                return 'Updated'
         return 'NotUpdated'
 
     @staticmethod

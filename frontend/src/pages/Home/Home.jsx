@@ -5,7 +5,7 @@ import Core from "../../ui/Core/core";
 import {recipeService} from "../../services/Posts/RecipeService";
 import {PacmanLoader} from "react-spinners";
 import Select from "react-select"
-import { Checkbox, FormControlLabel } from "@mui/material";
+import { Checkbox } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 
@@ -17,7 +17,6 @@ function Home() {
     const [ingredients, setIngredients] = useState([]);
     const [ingredientsChosen, setIngredientsChosen] = useState([]);
     const [checked, setChecked] = useState(false);
-    const [postChosen, setPostChosen] = useState({});
     
     useEffect(() => {
             const fetchData = async () => {
@@ -29,12 +28,9 @@ function Home() {
             }
             fetchData()
     }, [loaded]);
-    console.log('ingr = ', ingredients);
-    console.log('chosen = ', ingredientsChosen);
 
-    function handlePost() {
-        console.log('postchosen = ', postChosen);
-        navigate(`/post/${postChosen.id}`);
+    function handlePost(e) {
+        navigate(`/post/${e.id}`);
     }
     function searchHandle() {
         const fetchRecipes = async () => {
@@ -47,7 +43,6 @@ function Home() {
     }
     function checkHandler(el) {
         setIngredientsChosen([]);
-        setPostChosen({});
         setChecked(el.target.checked)
     }
     if (!loaded) {
@@ -67,7 +62,7 @@ function Home() {
                         {checked ? (<Select className={styles.slct} placeholder="Релевантный поиск" options={ingredients} getOptionLabel={o => o.name} getOptionValue={o => o.id} isMulti
                         onChange={setIngredientsChosen} key={checked}/>) : 
                         (<Select className={styles.slct} placeholder="Поиск по названию" options={posts} getOptionLabel={o => o.name} getOptionValue={o => o.id} key={checked}
-                        onChange={setPostChosen}/>)}
+                        onChange={(e) => handlePost(e)}/>)}
                         
                         <div className={styles.checkcontainer}>
                             <Checkbox checked={checked} onChange={(e) => checkHandler(e)} label={'Релевантный поиск'} className={styles.check}></Checkbox>
@@ -75,7 +70,7 @@ function Home() {
                         </div>
                     </div>
                     {checked ? (<button className={styles.btn} onClick={searchHandle}>Подтвердить</button>) :
-                    (<button className={styles.btn} onClick={handlePost}>Подтвердить</button>)}
+                    (<button className={styles.btnsearch}></button>)}
                 </div>
                 {posts.map((el) => (
                     <Post el={el} key={el.id}></Post>

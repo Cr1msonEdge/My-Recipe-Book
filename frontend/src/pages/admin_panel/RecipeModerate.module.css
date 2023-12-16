@@ -23,6 +23,7 @@
     margin-right: 10%;
     padding-top: 5px;
     padding-bottom: 10px;
+    padding-left: 10px;
     flex-direction: column;
     color: black;
     width: 80%;
@@ -113,4 +114,8 @@ td, tr {
 
 .author {
     color: purple;
+}
+
+.txt {
+    text-align: left;
 }

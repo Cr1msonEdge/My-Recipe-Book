@@ -11,6 +11,7 @@ const style = {
         ...base,
         border: 0,
         boxShadow: 'none',
+        fontSize: '16px'
     })
 };
 
@@ -49,6 +50,10 @@ function AddSomethingNew() {
                         name: itemName,
                         slug: itemSlug,
                     }
+                    if (!ingrMeasure || !itemName || !itemSlug) {
+                        alert('Заполните все поля');
+                        return;
+                    }
                     const data1 = await recipeService.postIngredient(ingr);
                     if (data1.message.includes('error')) {
                         alert(data1.message);
@@ -56,6 +61,7 @@ function AddSomethingNew() {
                     }
                     else {
                         alert('Будет выложено после модерации!');
+                        navigate('/profile');
                     }
                     break;
                 case 'category':
@@ -63,17 +69,26 @@ function AddSomethingNew() {
                         name: itemName,
                         slug: itemSlug,
                     }
+                    if (!itemName || !itemSlug) {
+                        alert('Заполните все поля');
+                        return;
+                    }
                     const data2 = await recipeService.postCategory(cat);
                     if (data2.message.includes('error')) {
                         alert(data2.message);
                         navigate('/addnew');
                     }
                     alert('Будет выложено после модерации!');
+                    navigate('/profile');
                     break;
                 case 'cousin':
                     const cous = {
                         name: itemName,
                         slug: itemSlug,
+                    }
+                    if (!itemName || !itemSlug) {
+                        alert('Заполните все поля');
+                        return;
                     }
                     const data3 = await recipeService.postCousin(cous);
                     if (data3.message.includes('error')) {
@@ -81,13 +96,13 @@ function AddSomethingNew() {
                         navigate('/addnew');
                     }
                     alert('Будет выложено после модерации!');
+                    navigate('/profile');
                     break;
                 default:
                     break;
             }
         }
         postData();
-        navigate('/profile');
     }
 
     return (
