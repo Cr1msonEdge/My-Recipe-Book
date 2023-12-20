@@ -29,13 +29,13 @@ class RecipeSerializer(serializers.ModelSerializer):
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['id', 'name', 'slug', 'is_published']
+        fields = ['id', 'name', 'slug', 'is_published', 'user']
 
 
 class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ingredient
-        fields = ['id', 'name', 'measure', 'slug', 'is_published']
+        fields = ['id', 'name', 'measure', 'slug', 'is_published', 'user']
 
 
 class MeasureSerializer(serializers.ModelSerializer):
@@ -47,7 +47,7 @@ class MeasureSerializer(serializers.ModelSerializer):
 class CousinSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cousin
-        fields = ['id', 'name', 'slug', 'is_published']
+        fields = ['id', 'name', 'slug', 'is_published', 'user']
 
 
 class CompositionSerializer(serializers.ModelSerializer):

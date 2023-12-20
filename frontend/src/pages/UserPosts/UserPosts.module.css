@@ -1,0 +1,32 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.Home {
+    display: flex;
+    text-align: center;
+    padding-top: 10px; 
+    align-content: center;
+    justify-content: left;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    min-height: 1000px;
+}
+
+.post {
+    background-color: red;
+}
+
+.loader {
+    position: relative;
+    margin-left: 45%;
+    width: 50%;
+    margin-right: 25%;
+}
+
+.txt {
+    font-size: 16px;
+    font-family: 'Open-sans', sans-serif;
+}

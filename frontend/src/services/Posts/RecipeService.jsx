@@ -97,5 +97,9 @@ export const recipeService = {
     async getSearch(data) {
         const response = await axios.post('http://localhost:8000/api/relevant', data);
         return response.data;
+    },
+    async userPosts(user) {
+        const response = await axios.get(`http://localhost:8000/api/userposts/${user}`, {withCredentials: true});
+        return response.data;
     }
 }

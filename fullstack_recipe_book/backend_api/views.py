@@ -831,3 +831,49 @@ class BanListView(APIView):
         for ban in Ban.objects.all():
             ban.delete()
         return Response('DEleted all')
+
+
+class UserPostsView(APIView):
+    def get(self, request, pk):
+        output = []
+        for element in Recipe.objects.filter(user=pk):
+            temp = {
+                "id": element.id,
+                "name": element.name,
+                "short_description": element.short_description,
+                "category": element.category.id,
+                "difficulty": element.difficulty,
+                "instruction": element.instruction,
+                "image": img_root + element.image.name,
+                "status": element.is_published
+            }
+            if element.user is not None:
+                temp['user'] = element.user.username
+            else:
+                temp['user'] = 'Unknown'
+            temp['type'] = 'Recipe'
+            output.append(temp)
+        for element in Ingredient.objects.filter(user=pk):
+            temp = {"id": element.id, "name": element.name, "measure": element.measure.name, "slug": element.slug,
+                    'type': 'Ingredient', 'status': element.is_published}
+            output.append(temp)
+        for element in Cousin.objects.filter(is_published=False):
+            temp = {
+                'id': element.id,
+                'name': element.name,
+                'slug': element.slug,
+                'type': 'Cousin',
+                'status': element.is_published
+            }
+            output.append(temp)
+        for element in Category.objects.filter(is_published=False):
+            temp = {
+                'id': element.id,
+                'name': element.name,
+                'slug': element.slug,
+                'type': 'Category',
+                'status': element.is_published
+            }
+            output.append(temp)
+
+        return Response(output)

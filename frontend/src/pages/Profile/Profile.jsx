@@ -33,6 +33,9 @@ function Profile() {
     function moderation() {
         navigate('/admin-menu');
     }
+    function myPosts() {
+        navigate(`/userpanel/${userData.id}`);
+    }
     function handleLogout() {
         const doLogout = async () => {
             const data = await authService.logout();
@@ -73,6 +76,7 @@ function Profile() {
                 {!userData.is_banned? (<button className={styles.btn} onClick={handleNewPost}>Добавить рецепт </button>) : <div></div>}
                 {!userData.is_banned? (<button className={styles.btn} onClick={handleNew}>Добавить новое </button>) : <div></div>}
                 {userData.is_staff ? (<button className={styles.btn} onClick={moderation}>Модерация</button>) : <div></div>}
+                <button className={styles.btn} onClick={myPosts}>Мои посты</button>
                 <button className={styles.btn} onClick={handleLogout}> Выйти </button>
             </div>
         </Core>

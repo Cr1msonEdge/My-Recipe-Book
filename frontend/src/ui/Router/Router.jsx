@@ -19,6 +19,8 @@ import AdminMenu from "../../pages/admin_panel/Menu/AdminMenu";
 import NewModerator from "../../pages/admin_panel/NewModerator/NewModerator";
 import BanUser from "../../pages/admin_panel/BanUser/BanUser";
 import UserProfile from "../../pages/UserProfile/UserProfile";
+import UserRecipe from "../../pages/UserPosts/UserRecipe";
+import UserPosts from "../../pages/UserPosts/UserPosts";
 
 
 function Router() {
@@ -44,6 +46,8 @@ function Router() {
                 <Route element={<BanUser/>} path={`/ban`}></Route>
                 <Route element={<UserProfile/>} path={`/user/:id`}></Route>
                 <Route element={<RecipeModerate/>} path={`admin/post/:id`}/>
+                <Route element={<UserRecipe/>} path={`userpanel/post/:id`}/>
+                <Route element={<UserPosts/>} path={`userpanel/:id`}/>
             </Routes>
         </BrowserRouter>
     )

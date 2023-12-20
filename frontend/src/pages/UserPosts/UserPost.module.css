@@ -1,0 +1,79 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.post {
+    display: block;
+    width: 80%;
+    height: 30%;
+    margin: 0 10% 10px;
+    background-color: #ddcff5;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 18px;
+    background-color: #eae2d6c6;
+    box-shadow: 0 0 2px #240227;
+    transition: box-shadow 200ms ease-in-out;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.post:hover {
+    box-shadow: 0 0 8px #240227;
+    transition: box-shadow 200ms ease-in-out;
+}
+
+.title {
+    font-size: 24px;
+}
+
+.img {
+    max-width: 30%;
+    max-height: 200px;
+    background-color: #ddcff5;
+    margin-left: 5px;
+}
+
+.btn {
+    width: 20%;
+    height: 10%;
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+    transition: border-color 0.4s ease;
+    border: 1px solid transparent;
+    color: black;
+    font-size: 14px;
+    margin-top: 2%;
+    margin-bottom: 5px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.btn:hover {
+    box-shadow: 0 0 5px #240227;
+    border-color: #8a2be2;
+}
+
+.flx {
+    display: flex;
+    width: 100%;
+    height: 70%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.flxcol {
+    background-color: transparent;
+    width: 60%;
+    height: 100%;
+}
+
+.subtitle {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+}
+
+.txt {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+}

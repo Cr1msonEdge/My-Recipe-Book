@@ -4,6 +4,7 @@ import Select from "react-select";
 import styles from "./AddSomethingNew.module.css";
 import {recipeService} from "../../services/Posts/RecipeService";
 import {useNavigate} from "react-router-dom";
+import {authService} from "../../services/Authentication/AuthenticationService";
 
 
 const style = {
@@ -25,14 +26,19 @@ function AddSomethingNew() {
     const navigate = useNavigate();
 
     const [measures, setMeasures] = useState([]);
-
+    const [userData, setUserData] = useState({});
     useEffect(() => {
         const fetchData = async () => {
+            const userdata = await authService.isLoginned();
+            if (userdata.detail !== 'success') {
+                navigate('/');
+            } 
+            setUserData(userdata);
             const data = await recipeService.getMeasures();
             setMeasures(data);
         }
         fetchData();
-    }, [])
+    }, [navigate])
 
 
     console.log('ms = ', measures);
@@ -49,6 +55,7 @@ function AddSomethingNew() {
                         measure: ingrMeasure.id,
                         name: itemName,
                         slug: itemSlug,
+                        user: userData.id
                     }
                     if (!ingrMeasure || !itemName || !itemSlug) {
                         alert('Заполните все поля');
@@ -68,6 +75,7 @@ function AddSomethingNew() {
                     const cat = {
                         name: itemName,
                         slug: itemSlug,
+                        user: userData.id
                     }
                     if (!itemName || !itemSlug) {
                         alert('Заполните все поля');
@@ -85,6 +93,7 @@ function AddSomethingNew() {
                     const cous = {
                         name: itemName,
                         slug: itemSlug,
+                        user: userData.id
                     }
                     if (!itemName || !itemSlug) {
                         alert('Заполните все поля');

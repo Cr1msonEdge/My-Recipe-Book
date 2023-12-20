@@ -5,7 +5,7 @@ from .views import (RegisterView, LoginView, UserView, LogoutView, RecipeListVie
                     CategoryIntView, IngredientListView, CousinListView, RecipeView, CompositionListView,
                     CompositionView, CategorySlugView, CousinSlugView, RatingListView, RatingUserView,
                     RatingUserRecipeView, RankListView, UserIdView, ModerationView, IngredientSlugView, RelevantView,
-                    RecipeAllView, BanUserView, NewModeratorView, BanListView, IngredientAllView)
+                    RecipeAllView, BanUserView, NewModeratorView, BanListView, IngredientAllView, UserPostsView)
 
 urlpatterns = [
     path('register', RegisterView.as_view()),
@@ -36,6 +36,7 @@ urlpatterns = [
     path('banuser', BanUserView.as_view()),
     path('newmoderator', NewModeratorView.as_view()),
     path('banlist', BanListView.as_view()),
+    path('userposts/<int:pk>', UserPostsView.as_view())
 ]
 # from backend_api.views import *
 
