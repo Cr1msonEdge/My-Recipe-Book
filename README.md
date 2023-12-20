@@ -133,6 +133,7 @@ PostgreSQL
 
 ## Структура БД
 Структура БД выглядит следующим образом: https://lucid.app/lucidchart/d911205a-1742-48f8-98e9-ffbc32aab61a/edit?viewport_loc=-56%2C-224%2C1404%2C1542%2C0_0&invitationId=inv_034d6e31-eca6-4ed9-aa11-1830e8df72ca
-![image](https://github.com/Cr1msonEdge/My-Recipe-Book/assets/91876824/eac9220f-d887-4283-a062-d6d4cb5d8301)
+![image](https://github.com/Cr1msonEdge/My-Recipe-Book/assets/91876824/8a0e7f7d-6bd0-43a1-8515-99efc7f022f1)
+
 
 
