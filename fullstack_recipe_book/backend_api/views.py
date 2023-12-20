@@ -83,9 +83,10 @@ class UserView(APIView):
         ans['rank'] = user.rank.name
         if user.is_staff:
             ans['avatar'] = user_img_root + '/moderator.jpg'
-        elif user.is_banned:
-            ans['avatar'] = user_img_root + '/banned.jpg'
+        elif Ban.objects.filter(user=user.id).first():
             ban = Ban.objects.filter(user=user.id).first()
+            ans['is_banned'] = True
+            ans['avatar'] = user_img_root + '/banned.jpg'
             ans['ban_name'] = ban.name
             ans['ban_info'] = ban.text
         elif user.rank.id == 1:
@@ -104,14 +105,15 @@ class UserIdView(APIView):
         if s is None:
             return Response('No one found')
         temp = {"id": s.id, "name": s.username, "email": s.email, "rank": s.rank, "about": s.about,
-                "is_staff": s.is_staff, "is_banned": s.is_banned}
+                "is_staff": s.is_staff}
         if s.rank is not None:
             temp['rank'] = s.rank.name
         if s.is_staff:
             temp['avatar'] = user_img_root + '/moderator.jpg'
-        elif s.is_banned:
-            temp['avatar'] = user_img_root + '/banned.jpg'
+        elif Ban.objects.filter(user=s.id).first():
             ban = Ban.objects.filter(user=s.id).first()
+            temp['is_banned'] = True
+            temp['avatar'] = user_img_root + '/banned.jpg'
             temp['ban_name'] = ban.name
             temp['ban_info'] = ban.text
         elif s.rank.id == 1:
@@ -776,6 +778,11 @@ class BanUserView(APIView):
         ban_serializer = BanSerializer(data=ban_data)
         if serializer.is_valid(raise_exception=True) and ban_serializer.is_valid(raise_exception=True):
             ban_serializer.save()
+            user_reviews = Rating.objects.filter(user=user.id)
+            for review in user_reviews:
+                review.delete()
+            for post in Recipe.objects.filter(user=user.id):
+                post.delete()
             serializer.save()
             return Response("Пользователь успешно заблокирован.")
 
@@ -809,7 +816,7 @@ class BanListView(APIView):
         bans = Ban.objects.all()
         output = []
         for ban in bans:
-            temp = {'id': ban.id, 'name': ban.name, 'text': ban.text, 'user': ban.user.id}
+            temp = {'name': ban.name, 'text': ban.text, 'user': ban.user.id}
             output.append(temp)
         return Response(output)
 

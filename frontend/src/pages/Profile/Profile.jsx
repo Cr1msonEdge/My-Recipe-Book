@@ -15,6 +15,7 @@ function Profile() {
     useEffect(() => {
         const fetchData = async () => {
             const data = await authService.isLoginned();
+            console.log('userdata', data);
             data.detail === 'success' ? setIsLoginned(1) : setIsLoginned(2);
             setUserData(data);
             setLoaded(true);

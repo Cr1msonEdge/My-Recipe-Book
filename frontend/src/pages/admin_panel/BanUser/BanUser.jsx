@@ -8,8 +8,8 @@ import * as yup from 'yup'
 
 const shape = yup.object().shape({
     email: yup.string().email().required(),
-    banShort: yup.string().required(),
-    banFull: yup.string().required()
+    name: yup.string().required(),
+    text: yup.string().required()
 });
 
 
@@ -28,12 +28,13 @@ function BanUser() {
             }
         }
         fetchData()
-    }, []);
+    }, [navigate]);
 
 
 
     async function handler() {
         const banData = {email: email, name: banShort, text: banFull};
+        console.log('bandata', banData);
         const isValid = await shape.isValid(banData);
         if (!isValid) {
             alert('Заполните поля!');

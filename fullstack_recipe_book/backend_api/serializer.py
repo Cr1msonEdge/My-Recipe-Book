@@ -5,7 +5,7 @@ from .models import Recipe, User, Category, Ingredient, Measure, Cousin, Composi
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'password', 'about', 'rank', 'is_staff', 'is_banned']
+        fields = ['id', 'username', 'email', 'password', 'about', 'rank', 'is_staff']
         extra_kwargs = {
             'password': {"write_only": True}
         }
@@ -76,4 +76,4 @@ class RankSerializer(serializers.ModelSerializer):
 class BanSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ban
-        fields = ['id', 'name', 'text', 'user']
+        fields = ['name', 'text', 'user']

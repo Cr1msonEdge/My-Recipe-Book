@@ -17,7 +17,6 @@ class User(AbstractUser):
     avatar = models.ImageField(_("Image"), upload_to=upload_to, default='posts/rank3.jpg')
     rank = models.ForeignKey('Rank', null=True, on_delete=models.PROTECT)
     is_staff = models.BooleanField(default=False)
-    is_banned = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'password']
@@ -101,4 +100,4 @@ class Rank(models.Model):
 class Ban(models.Model):
     name = models.CharField(max_length=150, unique=True, db_index=True)
     text = models.TextField(default='')
-    user = models.ForeignKey('User', on_delete=models.PROTECT)
+    user = models.OneToOneField('User', on_delete=models.CASCADE, primary_key=True)
