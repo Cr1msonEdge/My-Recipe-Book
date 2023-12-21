@@ -77,7 +77,6 @@ class Rating(models.Model):
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=150, unique=True)
-    slug = models.SlugField(max_length=255, unique=True, db_index=True)
     measure = models.ForeignKey('Measure', on_delete=models.PROTECT)
     is_published = models.BooleanField(default=False)
     user = models.OneToOneField('User', on_delete=models.PROTECT, null=True)
